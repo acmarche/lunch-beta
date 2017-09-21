@@ -1,0 +1,21 @@
+<!-- Shopping cart Modal -->
+<div class="modal fade" id="shoppingcartdelete-{{ commandeProduit.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Enlever un produit du panier ?</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="commandeProduit" value="{{ commandeProduit.id }}" />
+                <!-- Items table -->
+                {{ commandeProduit.produit }} de chez {{ commandeProduit.commande.commerce }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-info">Confirmer</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- Model End -->

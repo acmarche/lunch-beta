@@ -1,0 +1,25 @@
+{% for categorie in categories %}
+    <div class="col-md-4 col-sm-6">
+        <!-- Menu Item -->
+        <div class="menu-item">
+            <!-- Heading -->
+            <h3>{{ categorie }}</h3>
+            <!-- Image -->
+            {% if categorie.imageName %}
+                <a href="{{ path('aclunch_categorie_show', {'id': categorie.id}) }}">
+                    <img class="img-responsive"
+                         src="{{ vich_uploader_asset(categorie, 'imageFile') | imagine_filter('aclunch_categorie_thumb') }}"
+                         alt="{{ categorie.nom }}"/>
+                </a>
+            {% endif %}
+            <!-- Paragraph -->
+            {% if categorie.description %}
+                <p>{{ categorie.description }}</p>
+            {% endif %}
+            <!-- Button -->
+            <a href="{{ path('aclunch_categorie_show', {'id': categorie.id}) }}"
+               class="btn btn-danger btn-xs">
+                Consulter</a>
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,71 @@
+{{ form_start(form) }}
+
+<div class="row">
+    <div class="col-lg-6">
+        {{ form_row(form.nom) }}
+    </div>
+    <div class="col-lg-6">
+        {{ form_row(form.description) }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        {{ form_row(form.categorie) }}
+    </div>
+    <div class="col-lg-6">
+        {{ form_row(form.prixHtva) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        {{ form_row(form.imageFile) }}
+
+    </div>
+    <div class="col-lg-6">
+        {{ form_row(form.tvaApplicable) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        {{ form_row(form.indisponible) }}
+    </div>
+    <div class="col-lg-6">
+        {{ form_row(form.quantiteStock) }}
+    </div>
+</div>
+
+{% if produit.isFood %}
+    <div class="form-group"><label class="control-label">Ingrédients</label>
+        <hr/>
+
+        <div id="produit_ingredients">
+            <table class="table table-bordered">
+                {% for row in form.ingredients|batch(2) %}
+                    <tr>
+                        {% for column in row %}
+                            <td>{{ form_widget(column) }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <div class="form-group"><label class="control-label">Suppléments</label>
+        <hr/>
+
+        <div id="produit_supplements">
+            <table class="table table-bordered">
+                {% for row in form.supplements|batch(3) %}
+                    <tr>
+                        {% for column in row %}
+                            <td>{{ form_widget(column) }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endif %}
+{{ form_end(form) }}

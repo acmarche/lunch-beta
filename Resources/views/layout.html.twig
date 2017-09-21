@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr-BE">
+<head>
+    <meta charset="utf-8">
+    <!-- Title here -->
+    <title>{% block title %}{% endblock %} Lunchs en ligne - Marche-en-Famenne</title>
+    <!-- Description, Keywords and Author -->
+    <meta name="description" content="Your description">
+    <meta name="keywords" content="Your,Keywords">
+    <meta name="author" content="ResponsiveWebInc">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Styles -->
+    <!-- Bootstrap CSS -->
+    <link href="{{ asset('bundles/acmarchelunch/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Portfolio CSS -->
+    <link href="{{ asset('bundles/acmarchelunch/css/prettyPhoto.css') }}" rel="stylesheet">
+    <!-- Font awesome CSS -->
+    <link href="{{ asset('bundles/acmarchelunch/css/font-awesome.min.css') }}" rel="stylesheet">
+    <!-- Custom Less -->
+    <link href="{{ asset('bundles/acmarchelunch/css/less-style.css') }}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{ asset('bundles/acmarchelunch/css/style.css') }}" rel="stylesheet">
+    <!-- STRIPE -->
+    <link href="{{ asset('bundles/acmarchelunch/css/stripe.css') }}" rel="stylesheet">
+    <!--[if IE]>
+    <link rel="stylesheet" href="{{ asset('bundles/acmarchelunch/css/ie-style.css') }}"><![endif]-->
+
+    {% block stylesheets %}{% endblock %}
+
+    <!-- Favicon -->
+    {% block favicon %}
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('bundles/acmarchelunch/favicon.ico') }}"/>
+    {% endblock %}
+</head>
+
+<body>
+
+{% include '@AcMarcheLunch/Base/modal_cart.html.twig' %}
+
+<!-- Page Wrapper -->
+<div class="wrapper">
+
+    {% include '@AcMarcheLunch/Base/header.html.twig' %}
+
+    <!-- Banner Start -->
+    <div class="banner padd">
+        <div class="container">
+            <!-- Image -->
+            <img class="img-responsive" src="{{ asset('bundles/acmarchelunch/img/crown-white.png') }}" alt=""/>
+
+            <!-- Heading -->
+            <h2 class="white">
+                {% block heading %}
+                    Bon appétit
+                {% endblock %}
+            </h2>
+
+            <ol class="breadcrumb">
+                {% block breadcrumb %}
+                    <li><a href="{{ path('aclunch_home') }}">Accueil</a></li>
+                    <li class="active">Bienvenue</li>
+                {% endblock %}
+            </ol>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <!-- Banner End -->
+
+
+    <!-- Inner Content -->
+    <div class="inner-page padd">
+
+        {% include '@AcMarcheLunch/flash.html.twig' %}
+
+        {#% include '@AcMarcheLunch/Base/case.html.twig' %#}
+
+        {% block body %}
+
+        {% endblock %}
+
+    </div><!-- / Inner Page Content End -->
+
+    {% include '@AcMarcheLunch/Base/footer.html.twig' %}
+
+</div><!-- / Wrapper End -->
+
+<!-- Scroll to top -->
+<span class="totop"><a href="#"><i class="fa fa-angle-up"></i></a></span>
+
+
+<!-- Javascript files -->
+<!-- jQuery -->
+<script src="{{ asset('bundles/acmarchelunch/js/jquery.js') }}"></script>
+<!-- Bootstrap JS -->
+<script src="{{ asset('bundles/acmarchelunch/js/bootstrap.min.js') }}"></script>
+<!-- Pretty Photo JS -->
+<script src="{{ asset('bundles/acmarchelunch/js/jquery.prettyPhoto.js') }}"></script>
+<!-- Respond JS for IE8 -->
+<script src="{{ asset('bundles/acmarchelunch/js/respond.min.js') }}"></script>
+<!-- HTML5 Support for IE -->
+<script src="{{ asset('bundles/acmarchelunch/js/html5shiv.js') }}"></script>
+<!-- Custom JS -->
+<script src="{{ asset('bundles/acmarchelunch/js/custom.js') }}"></script>
+
+<script src="https://js.stripe.com/v3/"></script>
+
+<!-- JS code for this page -->
+{% block scripts %}
+
+{% endblock %}
+</body>
+</html>

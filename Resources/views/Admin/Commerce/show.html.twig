@@ -1,0 +1,23 @@
+{% extends '@AcMarcheLunch/Admin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="page-header">
+        <h3>{{ commerce.nom }}</h3>
+    </div>
+
+    {% include '@AcMarcheLunch/Admin/Commerce/actions.html.twig' with {'entity': commerce } %}
+
+    {% if commerce.imageName %}
+        {% include '@AcMarcheLunch/Admin/Commerce/image.html.twig' with {'commerce': commerce } %}
+    {% else %}
+        {% include '@AcMarcheLunch/Admin/Commerce/bottin.html.twig' with {'commerce': commerce, 'error': error } %}
+    {% endif %}
+
+    {% include '@AcMarcheLunch/Admin/Commerce/detail.html.twig' with {'commerce': commerce } %}
+
+    {% if is_granted('ROLE_LUNCH_ADMIN') %}
+        {% include '@AcMarcheLunch/Admin/Commerce/delete.html.twig' with {'delete_form': delete_form, 'entity': commerce } %}
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,5 @@
+{% for categorie in categories %}
+    <li>
+        <a href="{{ path('aclunch_categorie_show', {'id': categorie.id}) }}">{{ categorie }}</a>
+    </li>
+{% endfor %}

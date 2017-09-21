@@ -1,0 +1,37 @@
+{% extends '::base.html.twig' %}
+{% block favicon %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('bundles/acmarchelunch/favicon.ico') }}"/>
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('bundles/acmarchelunch/css/admin.css') }}" rel="stylesheet">
+{% endblock %}
+{% block title %}Lunchs{% endblock %}
+
+{% block brand %}
+    <a class="navbar-brand" href="{{ path('aclunch_admin_home') }}" title="Accueil">
+        <span class="glyphicon glyphicon-home"></span> Lunchs </a>
+{% endblock %}
+
+{% block menu_top %}
+    {% if is_granted('ROLE_LUNCH_ADMIN') %}
+        {% include '@AcMarcheLunch/Admin/Menu/admin.html.twig' %}
+
+    {% elseif is_granted('ROLE_LUNCH_LOGISTICIEN') %}
+        {% include '@AcMarcheLunch/Admin/Menu/logisticien.html.twig' %}
+
+    {% elseif is_granted('ROLE_LUNCH_COMMERCE') %}
+        {% include '@AcMarcheLunch/Admin/Menu/commerce.html.twig' %}
+    {% endif %}
+
+    <li>
+        <a href="{{ path('aclunch_admin_doc') }}">
+            <span class="glyphicon glyphicon-book"></span> Doc
+        </a>
+    </li>
+
+{% endblock %}
+
+{% block body %}
+
+{% endblock %}

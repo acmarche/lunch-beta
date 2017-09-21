@@ -1,0 +1,61 @@
+<form role="form">
+    <input type="hidden" name="token" id="token" value="{{ token }}">
+    <input type="hidden" name="commerce" id="commerce"
+           value="{{ produit.commerce.id }}">
+    <!-- Table -->
+    <table class="table table-bordered">
+        <tr>
+            <td>Prix</td>
+            <td>{{ produit | prixTvac | number_format }} €</td>
+        </tr>
+        <tr>
+            <td>Livraison</td>
+            <td>x euros ?</td>
+        </tr>
+        <tr>
+            <td>Délais de livraison</td>
+            <td>x Min ?</td>
+        </tr>
+        <tr>
+            <td>Quantité</td>
+            <td>
+                <div class="form-group">
+                    <input type="number" value="1" name="quantite" placeholder="" id="produit_quantite" class="form-control" />
+                </div>
+            </td>
+        </tr>
+        {% if produit.supplements | length > 0 %}
+            <tr>
+                <td>Personnaliser</td>
+                <td>
+                    <div class="form-group">
+                        <select class="form-control input-sm">
+                            <option>Ajouter un supplément</option>
+                            {% for supplement in produit.supplements %}
+                                <option>{{ supplement }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                </td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <div class="form-group">
+                    {% if is_granted('ROLE_LUNCH_CLIENT') %}
+                        <button id="addpanier" type="button"
+                                class="btn btn-danger btn-sm">Ajouter au panier
+                        </button>
+                    {% else %}
+                        <a href="{{ path('fos_user_security_login') }}"
+                           class="btn btn-danger btn-sm">
+                            Ajouter au panier
+                        </a>
+                    {% endif %}
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>

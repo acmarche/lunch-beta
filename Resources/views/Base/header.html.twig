@@ -1,0 +1,51 @@
+<!-- Header Start -->
+
+<div class="header">
+    <div class="container">
+        <!-- Header top area content -->
+        <div class="header-top">
+            <div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <!-- Header top left content contact -->
+                    <div class="header-contact">
+                        <!-- Contact number -->
+                        <span><i class="fa fa-phone red"></i> 084 32 70 78</span>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <!-- Header top right content search box -->
+                    <div class=" header-search">
+                        {% include '@AcMarcheLunch/Search/form-inline.html.twig' %}
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <!-- Button Kart -->
+                    {% include '@AcMarcheLunch/Base/panier-resume.html.twig' %}
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-5">
+                <!-- Link -->
+                <a href="{{ path('aclunch_home') }}">
+                    <!-- Logo area -->
+                    <div class="logo">
+                        <img class="img-responsive" src="{{ asset('bundles/acmarchelunch/img/logo.png') }}"
+                             alt=""/>
+                        <!-- Heading -->
+                        <h1>Lunchs en ligne</h1>
+                        <!-- Paragraph -->
+                        <p>Commandez et faites vous livrer :-).</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-8 col-sm-7">
+                <!-- Navigation -->
+                {% include '@AcMarcheLunch/Base/menu_top.html.twig' %}
+            </div>
+        </div>
+    </div> <!-- / .container -->
+</div>
+
+<!-- Header End -->

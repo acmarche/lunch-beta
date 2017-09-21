@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h3>Food</h3>
+<table class="table table-bordered ">
+    <tr>
+        <th>Id</th>
+        <th>Quantite</th>
+        <th>Id</th>
+        <th>Quantite</th>
+    </tr>
+    <tr>
+        <td>{{ result.food.id1 }}</td>
+        <td>{{ result.food.q1 }}</td>
+        <td>{{ result.food.id2 }}</td>
+        <td>{{ result.food.q2 }}</td>
+    </tr>
+</table>
+
+    <h3>Classic</h3>
+<table class="table table-bordered ">
+    <tr>
+        <th>Id</th>
+        <th>Quantite</th>
+        <th>Id</th>
+        <th>Quantite</th>
+    </tr>
+    <tr>
+        <td>{{ result.classic.id1 }}</td>
+        <td>{{ result.classic.q1 }}</td>
+        <td>{{ result.classic.id2 }}</td>
+        <td>{{ result.classic.q2 }}</td>
+    </tr>
+</table>
+
+{% endblock %}
+

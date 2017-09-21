@@ -1,0 +1,49 @@
+<?php
+
+namespace AcMarche\LunchBundle\Form;
+
+use AcMarche\LunchBundle\Entity\InterfaceDef\CommandeInterface;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class ValiderCommandeType extends AbstractType
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add(
+                'valide',
+                CheckboxType::class,
+                [
+                    'label' => 'Prête à être livrée',
+                ]
+            )
+            ->add(
+                'valideRemarque',
+                TextareaType::class,
+                [
+                    'required' => false,
+                    'label' => 'Remarque sur la validation',
+                ]
+            );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(
+            array(
+                'data_class' => CommandeInterface::class,
+            )
+        );
+    }
+
+}

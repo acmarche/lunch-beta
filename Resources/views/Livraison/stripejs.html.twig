@@ -1,0 +1,98 @@
+<script src="{{ asset('bundles/acmarchelunch/js/panier.js') }}"></script>
+<script>
+    function create_handler(commandeId) {
+        var handler = StripeCheckout.configure({
+            key: 'pk_test_3f6yquEdxKKO1FSTyNw8zFhd',
+            image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+            locale: 'auto',
+            currency: "eur",
+            name: 'AcMarche Lunch',
+            zipCode: true,
+            token: function (token) {
+                // You can access the token ID with `token.id`.
+                // Get the token ID to your server-side code for use.
+                console.log("finish");
+                console.log(token);
+                var myData = {
+                    token2: token,
+                    stripeToken: token.id,
+                    stripeTokenType: token.type,
+                    stripeEmail: token.email,
+                    clientIp: token.client_ip
+                };
+
+                var urlpost = '{{ path("aclunch_paiement_validation", {'id': 'commandeid'}) }}';
+                urlpost = urlpost.replace("commandeid", commandeId);
+
+                $.ajax({
+                    url: urlpost,
+                    type: "POST",
+                    dataType: "json",
+                    data: myData,
+                    success: function (data) {
+                        console.log(data);
+                        if (data.error) {
+                            $('div#ajax-error').show();
+                            $('div#ajax-error').html(data.error);
+                        }
+                        else {
+                            window.location = "{{ path('aclunch_livraison_paiement') }}";
+                        }
+                    },
+                    error: function (data) {
+                        $('div#ajax-error').show();
+                        console.log(data);
+                        $('div#ajax-error').html("Erreur system");
+                    }
+                });
+            }
+        });
+        return handler;
+    }
+</script>
+
+<script>
+    $('.stripe-button').on('click', function (event) {
+        event.preventDefault();
+        var target = event.target;
+        if (!target)
+            return false;
+
+        // var booking_id = $(this).data('booking-id');
+        var commandeId = $(this).data("commande-id");
+        var url = '{{ path("aclunch_ajax_getcommande", {'id': 'commandeid'}) }}';
+        url = url.replace("commandeid", commandeId);
+        var token = $("#tokenPanier").val();
+
+        $.getJSON(url, function (data) {
+            if (data.data.error) {
+                $('div#ajax-error').show();
+                $('div#ajax-error').html(data.data.error);
+                return false;
+            }
+
+            var amount = data.data.total;
+            var handler = create_handler(commandeId);
+
+            // Open Checkout with further options:
+            handler.open({
+                name: 'AcMarche',
+                description: 'Payer ma commande',
+                panelLabel: 'Payer ',
+                amount: amount * 100
+                {% if app.user %}
+                , email: '{{ app.user.email }}'
+                {% endif %}
+            });
+
+        });
+
+        // Close Checkout on page navigation:
+        window.addEventListener('popstate', function () {
+            handler.close();
+        });
+
+        return false;
+    });
+</script>
+

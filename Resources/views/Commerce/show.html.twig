@@ -1,0 +1,72 @@
+{% extends '@AcMarcheLunch/layout.html.twig' %}
+
+{% block title %}{{ commerce.nom }}{% endblock %}
+
+{% block heading %}
+    {{ commerce }}
+{% endblock %}
+
+{% block body %}
+    <div class="blog">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- The new post done by user's all in the post block -->
+                    <div class="blog-post">
+                        <!-- Entry is the one post for each user -->
+                        <div class="entry">
+                            <!-- Post Images -->
+                            <div class="blog-img pull-left">
+                                {% if commerce.imageName %}
+                                    <img src="{{ vich_uploader_asset(commerce, 'imageFile') | imagine_filter('aclunch_commerce_thumb') }}"
+                                         class="img-responsive img-thumbnail" alt=""/>
+                                {% endif %}
+                            </div>
+                            <!-- Meta for this block
+                            <div class="meta">
+                                <i class="fa fa-calendar"></i>&nbsp; Jan 13, 2014
+                                <span class="pull-right"><i class="fa fa-comment"></i> <a href="#">&nbsp;2 Comments</a></span>
+                            </div>-->
+                            <!-- Heading of the  post -->
+                            <h3><a href="#">{{ commerce | upper }}</a></h3>
+                            <hr/><!-- Horizontal line -->
+                            <!-- Paragraph -->
+                            <p>
+                                {% include '@AcMarcheLunch/Commerce/bottin.html.twig' with {'fiche': fiche, 'commerce': commerce} %}
+                                <strong>Numéro TVA:</strong> {{ commerce.numeroTva }}<br/>
+                                <strong>Compte IBAN:</strong>{{ commerce.iban }}<br/>
+                            </p>
+                            <div class="clearfix"></div>
+                        </div>
+                        {% include '@AcMarcheLunch/Commerce/produits.html.twig' with {'commerce': commerce} %}
+                        <!-- Comment section -->
+                    </div><!--/ Blog post class end -->
+                    <!-- Comment posting -->
+
+                    {% include '@AcMarcheLunch/Commerce/contact_form.html.twig' with {'form': form} %}
+
+
+                    <!-- Navigation -->
+                    <div class="navigation button">
+                        {% if previous %}
+                            <div class="pull-left">
+                                <a href="{{ path('aclunch_commerce_show', { 'id': previous.id }) }}"
+                                   class="btn btn-danger btn-sm">&laquo; Commerce précédent</a>
+                            </div>
+                        {% endif %}
+                        {% if next %}
+                            <div class="pull-right">
+                                <a href="{{ path('aclunch_commerce_show', { 'id': next.id }) }}"
+                                   class="btn btn-danger btn-sm">Commerce suivant &raquo;</a>
+                            </div>
+                        {% endif %}
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div> <!--/ Main blog column end -->
+            </div><!--/ Row end -->
+        </div>
+    </div>
+
+    <!-- Blog End -->
+{% endblock %}

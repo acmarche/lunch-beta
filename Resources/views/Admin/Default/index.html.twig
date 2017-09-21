@@ -1,0 +1,17 @@
+{% extends '@AcMarcheLunch/Admin/layout.html.twig' %}
+
+{% block body %}
+    <div class="page-header">
+        <h3>Gestion des commandes lunchs et ecommerce</h3>
+    </div>
+
+    {% if is_granted('ROLE_LUNCH_COMMERCE') %}
+        {% include '@AcMarcheLunch/Admin/Default/dashboard_commerce.html.twig' %}
+    {% endif %}
+
+    {% if is_granted('ROLE_LUNCH_LOGISTICIEN') %}
+        {% include '@AcMarcheLunch/Admin/Default/dashboard_logisticien.html.twig' %}
+    {% endif %}
+
+
+{% endblock %}

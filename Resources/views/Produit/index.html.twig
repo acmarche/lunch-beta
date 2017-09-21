@@ -1,0 +1,72 @@
+{% extends '@AcMarcheLunch/layout.html.twig' %}
+
+{% block heading %}
+    Liste des produits
+{% endblock %}
+
+{% block body %}
+    <div class="shopping">
+        <div class="container">
+            <!-- Shopping items content -->
+            <div class="shopping-content">
+                <div class="row">
+
+                    {% for produit in produits %}
+
+                        <div class="col-md-3 col-sm-6">
+                            <!-- Shopping items -->
+                            <div class="shopping-item">
+                                <!-- Image -->
+                                {% if produit.imageName %}
+                                    <a href="{{ path('aclunch_produit_show', { 'id': produit.id }) }}">
+                                        <img class="img-responsive"
+                                             src="{{ vich_uploader_asset(produit, 'imageFile') | imagine_filter('aclunch_produit_thumb') }}"
+                                             alt="{{ produit.nom }}"/>
+                                    </a>
+                                {% endif %}
+                                <!-- Shopping item name / Heading -->
+                                <h4 class="pull-left">
+                                    <a href="{{ path('aclunch_admin_produit_show', { 'id': produit.id }) }}">
+                                        {{ produit.nom }}</a></h4>
+                                <span class="item-price pull-right">{{ produit | prixTvac | number_format }} €</span>
+                                <div class="clearfix"></div>
+                                <!-- Paragraph -->
+                                <p>{{ produit.commerce }}
+
+                                    {% if produit.description %}
+                                        {{ produit.description }}.
+                                    {% endif %}
+                                </p>
+                                <!-- Buy now button -->
+                                <div class="visible-xs">
+                                    <a class="btn btn-danger btn-sm"
+                                       href="{{ path('aclunch_produit_show', {'id': produit.id}) }}">Ajouter au
+                                        panier</a>
+                                </div>
+                                <!-- Shopping item hover block & link -->
+                                <div class="item-hover br-red hidden-xs"></div>
+                                <a class="link hidden-xs" href="#">Ajouter au panier</a>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                </div>
+                <!-- Pagination
+                <div class="shopping-pagination">
+                    <ul class="pagination">
+                        <li class="disabled"><a href="#">&laquo;</a></li>
+                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">&raquo;</a></li>
+                    </ul>
+                </div> -->
+                <!-- Pagination end-->
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,73 @@
+<div class="btn-toolbar" role="toolbar" style="margin: 0;">
+
+    {% if is_granted('ROLE_LUNCH_ADMIN') %}
+        <div class="btn-group">
+            <a href="{{ path('aclunch_admin_commande_index') }}" class="btn btn-primary" role="button"><i
+                        class="glyphicon glyphicon-list"></i>
+                Retour à la liste</a>
+        </div>
+    {% endif %}
+
+    {% if is_granted('ROLE_LUNCH_COMMERCE') and commande.isFood == false %}
+        <div class="btn-group">
+            <a href="{{ path('aclunch_admin_commande_valider_edit', {'id':commande.id}) }}" class="btn btn-warning"
+               role="button"><i
+                        class="glyphicon glyphicon-list"></i>
+                Valider la commande</a>
+        </div>
+    {% endif %}
+
+    {% if is_granted('ROLE_LUNCH_LOGISTICIEN') %}
+        <div class="btn-group">
+            {% if   commande.isFood == false %}
+                <a href="{{ path('aclunch_logisticien_commande_livrer', {'id':commande.id}) }}" class="btn btn-warning"
+                   role="button"><i
+                            class="glyphicon glyphicon-list"></i>
+                    Traiter</a>
+
+            {% else %}
+                <a href="{{ path('aclunch_logisticien_commande_lunch_livrer', {'id':commande.id}) }}"
+                   class="btn btn-warning"
+                   role="button"><i
+                            class="glyphicon glyphicon-list"></i>
+                    Traiter</a>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <div class="btn-group">
+        {% if   commande.isFood %}
+
+            <a href="{{ path('aclunch_admin_commande_lunch_export_pdf', {'id':commande.id}) }}"
+               class="btn btn-primary"
+               role="button"><i
+                        class="glyphicon glyphicon-export"></i>
+                Exporter</a>
+        {% else %}
+            <a href="{{ path('aclunch_admin_commande_export_pdf', {'id':commande.id}) }}" class="btn btn-primary"
+               role="button"><i
+                        class="glyphicon glyphicon-export"></i>
+                Exporter</a>
+        {% endif %}
+    </div>
+
+    <div class="btn-group">
+        {% if   commande.isFood %}
+
+            <a href="{{ path('aclunch_commande_lunch_facture_pdf', {'id':commande.id}) }}"
+               class="btn btn-primary"
+               role="button"><i
+                        class="glyphicon glyphicon-download"></i>
+                Facture</a>
+
+        {% else %}
+
+            <a href="{{ path('aclunch_commande_lunch_facture_pdf', {'id':commande.id}) }}"
+               class="btn btn-primary"
+               role="button"><i
+                        class="glyphicon glyphicon-download"></i>
+                Facture</a>
+        {% endif %}
+    </div>
+</div>
+<br/>

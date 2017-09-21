@@ -1,0 +1,98 @@
+{% extends '@AcMarcheLunch/layout.html.twig' %}
+
+{% block heading %}
+    Valider ma commande
+{% endblock %}
+{% block breadcrumb %}
+    <li><a href="{{ path('aclunch_home') }}">Accueil</a></li>
+    <li class="active">Panier</li>
+{% endblock %}
+{% block body %}
+    <div class="general">
+        <div class="container">
+            <h3>Valider mon panier</h3>
+            {% include '@AcMarcheLunch/Panier/alert.html.twig' with {'ruptures': ruptures, 'indisponibles': indisponibles} %}
+            <div id="ajax-error" class="alert alert-danger" style="display: none;">
+
+            </div>
+            <!-- General information content -->
+            <div class="general-content">
+                {% for commande in commandes %}
+
+                    <h4>Commande chez
+                        <strong>
+                            <a href="{{ path('aclunch_commerce_show', {'id': commande.commerce.id}) }}">{{ commande.commerce }}</a>
+                        </strong>
+                    </h4>
+                    {{ form_start(formDelete) }}
+                   <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th style="width: 30%;">Nom</th>
+                            <th style="width: 30%;">Prix</th>
+                            <th style="width: 20%;">Quantite</th>
+                            <th style="width: 20%;">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for commandeProduit in commande.commandeProduits %}
+                            {% set produit = commandeProduit.produit %}
+                            {% set produitPrixTvac = produit | prixTvac %}
+                            <tr>
+                                <td>
+                                    <a data-toggle="modal" href="#shoppingcartdelete-{{ commandeProduit.id }}"
+                                       title="Retirer le produit du panier"
+                                       href="{{ path('aclunch_panier_produit_delete', {'id': commandeProduit.id}) }}">
+                                        <span class="fa fa-trash"></span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{ path('aclunch_produit_show', { 'id': produit.id }) }}">
+                                        {{ produit }}
+                                    </a>
+                                </td>
+                                <td>
+                                    {{ produit | prixTvac | number_format }} €
+                                </td>
+                                <td>
+                                    <input type="hidden" name="tokenPanier-{{ commandeProduit.id }}" id="tokenPanier-{{ commandeProduit.id }}" value="{{ csrf_token(commandeProduit) }}">
+
+                                    <input type="number" min="1" max="50" class="quantitePanier"
+                                           id="quantite-{{ commandeProduit.id }}" name="quantite"
+                                           value="{{ commandeProduit.quantite }}"
+                                           data-idcommandeproduit="{{ commandeProduit.id }}"/>
+                                </td>
+                                <td>
+                                    <div id="ajax-results-{{ commandeProduit.id }}">
+                                        {{ (produitPrixTvac * commandeProduit.quantite) | number_format }} €
+                                    </div>
+                                </td>
+                            </tr>
+                            {% include '@AcMarcheLunch/Panier/modal.html.twig' with {'commandeProduit': commandeProduit} %}
+                        {% endfor %}
+                        {% include '@AcMarcheLunch/Panier/frais_transaction.html.twig' with {'couts':commande.couts} %}
+                        <tr class="text-warning">
+                            <td colspan="4"><strong>Soit un total à payer de</strong></td>
+                            <td>
+                                <strong>
+                                    <div id="ajax-results-totalcommande">
+                                        {{ commande.couts.total | number_format }} €
+                                    </div>
+                                </strong>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    {{ form_end(formDelete) }}
+                    <a href="{{ path('aclunch_livraison') }}" class="btn btn-primary">Date et lieu de livraison</a>
+                {% else %}
+                    <p class="text-warning">Votre panier est vide</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    {% include '@AcMarcheLunch/Panier/updatejs.html.twig' %}
+{% endblock %}

@@ -1,0 +1,15 @@
+<h5>Lunch ? : {{ dump(produit.isFood) }}</h5>
+
+<h5>Ingrédients :</h5>
+<!-- Recipe ingredients -->
+{% if produit.ingredients | length > 0 %}
+    <ul class="list-unstyled">
+        {% for ingredient in produit.ingredients %}
+            <li>
+                <i class="fa fa-check"></i> {{ ingredient }}
+                <span class="pull-right"> </span>
+                <div class="clearfix"></div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

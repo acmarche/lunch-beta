@@ -1,0 +1,21 @@
+{% if  app.flashes %}
+    <!-- flashes -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                {% for label, messages in app.flashes %}
+                    <div class="panel panel-{{ label }}">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ label }}</h3>
+                        </div>
+                        <div class="panel-body">
+                            {% for message in messages %}
+                                {{ message }} <br/>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endif %}

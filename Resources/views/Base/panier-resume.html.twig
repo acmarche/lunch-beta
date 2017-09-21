@@ -1,0 +1,17 @@
+<div class="btn-cart-md">
+    <a class="cart-link" href="{{ path('aclunch_panier') }}">
+        <!-- Image -->
+        <img class="img-responsive" src="{{ asset('bundles/acmarchelunch/img/cart.png') }}"
+             alt=""/>
+        <!-- Heading -->
+        <h4>Votre panier</h4>
+        <span>
+            {{ render(controller('AcMarcheLunchBundle:Ajax:resume')) }}
+       </span>
+        <div class="clearfix"></div>
+    </a>
+
+    {{ render(controller('AcMarcheLunchBundle:Ajax:list')) }}
+
+    <div class="clearfix"></div>
+</div>

@@ -1,0 +1,47 @@
+<!-- Nutrition Start -->
+<div class="pricing  padd">
+    <div class="container">
+        <div class="row">
+            {% for produit in commerce.produits %}
+                <div class="col-md-6 col-sm-6">
+                    <!-- Pricing list Item -->
+                    <div class="pricing-item">
+                        <!-- Image -->
+                        <a href="{{ path('aclunch_produit_show', { 'id': produit.id }) }}">
+                            <img class="img-responsive img-thumbnail"
+                                 src="{{ vich_uploader_asset(produit, 'imageFile') | imagine_filter('aclunch_produit_zoom') }}"
+                                 alt="{{ produit.nom }}" title="Ajouter au panier"/>
+                        </a>
+                        <!-- Pricing item details -->
+                        <div class="pricing-item-details">
+                            <!-- Heading -->
+                            <h3>
+                                <a href="{{ path('aclunch_produit_show', { 'id': produit.id }) }}"
+                                   title="Ajouter au panier">
+                                    {{ produit }}
+                                </a>
+                            </h3>
+                            <!-- Paragraph -->
+                            <p>
+                                {% for ingredient in produit.ingredients %}
+                                    {{ ingredient }} {% if not loop.last %}, {% endif %}
+                                {% endfor %}
+                                {{ produit.description }}
+                            </p>
+                            <!-- Buy link -->
+                            <a class="btn btn-danger pull-right" href="{{ path('aclunch_produit_show', { 'id': produit.id }) }}">Ajouter au panier</a>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!-- Tag -->
+                        <span class="hot-tag br-red">{{ produit | prixTvac | number_format }} €</span>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                {% if loop.index is divisible by(2) %}
+                    <div class="clearfix visible-md"></div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <!-- Nutrition End -->
+    </div>
+</div>

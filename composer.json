@@ -1,0 +1,41 @@
+{
+    "name": "acmarche/lunch-bundle",
+    "description": "Commande de lunch",
+    "homepage": "https://github.com/acmarche/lunch-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jean-François Sénéchal",
+            "email": "informatique@marche.be",
+            "homepage": "http://cst.marche.be",
+            "role": "Developer"
+        }
+    ],
+    "type": "symfony-bundle",
+    "autoload": {
+        "psr-4": {
+            "AcMarche\\LunchBundle\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "require": {
+
+    },
+    "require-dev": {
+
+    },
+    "scripts": {
+        "symfony-scripts": [
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets"
+        ],
+        "post-install-cmd": [
+            "@symfony-scripts"
+        ]
+    },
+    "extra": {
+        "branch-alias": null
+    }
+}

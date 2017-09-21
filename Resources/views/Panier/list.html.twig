@@ -1,0 +1,42 @@
+<div id="panier-list">
+    {% if nombreProduits > 0 %}
+        {% set break = false %}
+        <ul class="cart-dropdown" role="menu">
+        {#    {% for commandeProduit in commandeProduits if not break %}
+                {% set produit = commandeProduit.produit %}
+                <li>
+                    <!-- Cart items for shopping list -->
+                    <div class="cart-item">
+                        <!-- Item remove icon -->
+                        <a href="#"><i class="fa fa-times"></i></a>
+                        <!-- Image -->
+                        <img class="img-responsive img-rounded"
+                             src="{{ vich_uploader_asset(produit, 'imageFile') | imagine_filter('aclunch_produit_list') }}"
+                             alt="{{ produit.nom }}"/>
+                        <!-- Title for purchase item -->
+                        <span class="cart-title"><a href="{{ path('aclunch_produit_show', { 'id': produit.id }) }}">{{ produit }}</a></span>
+                        <!-- Cart item price -->
+                        <span class="cart-price pull-right red">Quantité: {{ commandeProduit.quantite }}</span>
+                        <div class="clearfix"></div>
+                    </div>
+                </li>
+                {% if loop.index > 5 %}
+                    {% set break = true %}
+                {% endif %}
+            {% endfor %}
+            {% if nombreProduits > 5 %}
+                <div class="cart-item">
+                    Et {{ nombreProduits - 4 }} autres produits...
+                </div>
+            {% endif %}#}
+            <li>
+                <!-- Cart items for shopping list -->
+                <div class="cart-item">
+                    <a class="btn btn-danger" data-toggle="modal" href="{{ path('aclunch_panier') }}">Consulter le
+                        panier
+                    </a>
+                </div>
+            </li>
+        </ul>
+    {% endif %}
+</div>

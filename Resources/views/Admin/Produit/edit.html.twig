@@ -1,0 +1,15 @@
+{% extends '@AcMarcheLunch/Admin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="page-header">
+        <h3>Edition du produit <strong>{{ produit }}</strong> ({{ produit.categorie }})</h3>
+    </div>
+
+    {% include '@AcMarcheLunch/Admin/Produit/form.html.twig' with {'form': edit_form} %}
+
+    <br /><br />
+    <span class="glyphicon glyphicon-arrow-left"></span>
+    <a href="{{ path('aclunch_admin_commerce_show', {'id': produit.commerce.id}) }}">Annuler</a>
+
+{% endblock %}

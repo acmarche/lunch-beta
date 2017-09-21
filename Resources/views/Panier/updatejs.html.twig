@@ -1,0 +1,52 @@
+<script src="{{ asset('bundles/acmarchelunch/js/panier.js') }}"></script>
+
+<script>
+    /**
+     * update panier
+     */
+    $(".quantitePanier").blur(function (e) {
+        var target = e.target;
+        if (!target)
+            return false;
+
+        var idField = target.id;
+        var idProduitCommande = $(this).data("idcommandeproduit");
+        var token = $("#tokenPanier-" + idProduitCommande).val();
+        console.log(token);
+        var valueProduitCommande = target.value;
+        // console.log(token);
+
+        var url = '{{ path("aclunch_panier_update", {'id': 'idProduitCommande'}) }}';
+        url = url.replace("idProduitCommande", idProduitCommande);
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            dataType: "json",
+            data: {
+                "commerce": idProduitCommande,
+                "quantiteProduit": valueProduitCommande,
+                "token": token
+            },
+            success: function (data) {
+                if (data.data.error) {
+                    $('div#ajax-error').show();
+                    $('div#ajax-error').html(data.data.error);
+                }
+                else {
+                    $('#ajax-results-' + idProduitCommande).html(data.data.produit);
+                    $('#ajax-results-totalcommande').html(data.data.commande);
+                    var urlResume = '{{ path('aclunch_panier_resume') }}';
+                    var urlList = '{{ path('aclunch_panier_list') }}';
+                    updateResume(urlResume, token);
+                }
+            },
+            error: function (data) {
+                $('div#ajax-error').show();
+                console.log(data);
+                $('div#ajax-error').html("Erreur system " + data.responseText);
+            }
+        });
+        return false;
+    });
+</script>

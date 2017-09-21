@@ -1,0 +1,20 @@
+<div class="media">
+    <div class="media-left">
+        <img class="media-object thumbnail"
+             src="{{ vich_uploader_asset(produit, 'imageFile') | imagine_filter('aclunch_admin_thumb') }}"
+             alt="{{ produit.nom }}"/>
+    </div>
+    <div class="media-body">
+        {% include '@AcMarcheLunch/Admin/Produit/detail.html.twig' with {'produit': produit } %}
+        <div class="clearfix"></div>
+        <h4 class="text-success">Ingrédients</h4>
+        {% if produit.ingredients | length > 0 %}
+            {% for ingredient in produit.ingredients %}
+                <a href="{{ path('aclunch_admin_ingredient_show', { 'id': ingredient.id }) }}"> {{ ingredient }}</a>
+                {% if not loop.last %}, {% endif %}
+            {% endfor %}
+        {% else %}
+            <p>Aucun sélectionné</p>
+        {% endif %}
+    </div>
+</div>

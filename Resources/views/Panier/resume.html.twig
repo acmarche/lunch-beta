@@ -1,0 +1,7 @@
+<div id="panier-resume">
+{% if nombreArticles > 0 %}
+    {{ nombreArticles }} arts {{ totalTvac | number_format }} €
+{% else %}
+    Panier vide
+{% endif %}
+</div>

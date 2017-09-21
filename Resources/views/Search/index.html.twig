@@ -1,0 +1,40 @@
+{% extends '@AcMarcheLunch/layout.html.twig' %}
+
+{% block heading %}
+    Recherche
+{% endblock %}
+
+{% block body %}
+    <div class="blog">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <!-- The new post done by user's all in the post block -->
+                    <div class="blog-post">
+                        <!-- Entry is the one post for each user -->
+                        <h3>Rechercher</h3>
+
+                        {% include '@AcMarcheLunch/Search/form.html.twig' with {'form':form} %}
+
+                        <hr/><!-- Horizontal line -->
+                        <div class="clearfix"></div>
+                        {% include '@AcMarcheLunch/Search/produits.html.twig' with {'produits': produits} %}
+                        <div class="clearfix"></div> <div class="clearfix"></div>
+                        {% include '@AcMarcheLunch/Search/commerces.html.twig' with {'commerces': commerces} %}
+                        {% include '@AcMarcheLunch/Search/ingredients.html.twig' with {'ingredients': ingredients} %}
+                        <div class="clearfix"></div>
+
+                        <!-- Comment section -->
+                    </div><!--/ Blog post class end -->
+                    <!-- Comment posting -->
+
+                    <!-- Navigation -->
+
+                    <div class="clearfix"></div>
+                </div> <!--/ Main blog column end -->
+            </div><!--/ Row end -->
+        </div>
+    </div>
+
+    <!-- Blog End -->
+{% endblock %}

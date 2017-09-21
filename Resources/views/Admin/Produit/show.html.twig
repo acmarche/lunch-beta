@@ -1,0 +1,22 @@
+{% extends '@AcMarcheLunch/Admin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="page-header">
+        <h3>Produit <strong>{{ produit }}</strong></h3>
+    </div>
+
+    {% include '@AcMarcheLunch/Admin/Produit/actions.html.twig' with {'entity': produit } %}
+
+    {% if produit.imageName %}
+        {% include '@AcMarcheLunch/Admin/Produit/image.html.twig' with {'produit': produit } %}
+    {% else %}
+        {% include '@AcMarcheLunch/Admin/Produit/detail.html.twig' with {'produit': produit } %}
+        {% include '@AcMarcheLunch/Admin/Ingredient/listes.html.twig' with {'ingredients': produit.ingredients} %}
+    {% endif %}
+
+    {% include '@AcMarcheLunch/Admin/Supplement/listes.html.twig' with {'supplements': produit.supplements} %}
+
+    {% include '@AcMarcheLunch/Admin/Produit/delete.html.twig' with {'delete_form': delete_form, 'entity': produit } %}
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends '@AcMarcheLunch/Admin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="page-header">
+        <h3>Ingrédient <strong>{{ ingredient }}</strong></h3>
+    </div>
+
+    {% include '@AcMarcheLunch/Admin/Ingredient/actions.html.twig' with {'entity': ingredient } %}
+
+    {% include '@AcMarcheLunch/Admin/Produit/listes.html.twig' with {'produits': ingredient.produits} %}
+
+    {% include '@AcMarcheLunch/Admin/Ingredient/delete.html.twig' with {'delete_form': delete_form, 'entity': ingredient } %}
+
+{% endblock %}

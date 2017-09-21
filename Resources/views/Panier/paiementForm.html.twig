@@ -1,0 +1,4 @@
+<form name="form-commande-{{ commande.id }}" id="form-commande-{{ commande.id }}" action="{{ path('aclunch_paiement_validation', {'id': commande.id}) }}" method="POST">
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+    <input type="button" name="valid" value="Payer ma commande" data-commande-id="{{ commande.id }}" class="btn btn-primary stripe-button">
+</form>

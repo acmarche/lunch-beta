@@ -1,0 +1,25 @@
+{% extends '@AcMarcheLunch/Admin/layout.html.twig' %}
+
+{% block body %}
+
+     <div class="page-header">
+        <h3>{{ lieulivraison }}</h3>
+    </div>
+
+    <address>
+        {{ lieulivraison.rue }} {{ lieulivraison.numero }} <br />
+        {{ lieulivraison.codePostal }} {{ lieulivraison.localite }}<br />
+
+        <p>
+        {{ lieulivraison.description }}
+        </p>
+
+    </address>
+
+    {% include '@AcMarcheLunch/Admin/LieuLivraison/actions.html.twig' with {'lieulivraison': lieulivraison } %}
+
+    {% include '@AcMarcheLunch/Admin/Commande/index_line.html.twig' with {'commandes': lieulivraison.commandes} %}
+
+    {% include '@AcMarcheLunch/Admin/LieuLivraison/delete.html.twig' with {'lieulivraison': lieulivraison } %}
+
+{% endblock %}

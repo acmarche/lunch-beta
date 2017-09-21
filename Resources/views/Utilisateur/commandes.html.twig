@@ -1,0 +1,47 @@
+<div class="page-header">
+    <h3>Liste de mes commandes</h3>
+</div>
+
+{% if commandes | length > 0 %}
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Numéro</th>
+            <th>Date</th>
+            <th>Commerce</th>
+            <th>Produits</th>
+            <th>Payé</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            <tr>
+                <td>
+                    <a href="{{ path('aclunch_commande_show', {'id':commande.id}) }}">
+                        Commande {{ commande.id }}
+                    </a>
+                </td>
+                <td>
+                    {{ commande.created | date('d-m-Y H:i ') }}
+                </td>
+                <td>
+                    {{ commande.commerceNom }}
+                </td>
+                <td>
+                    {{ commande.commandeProduits | length }}
+                </td>
+                <td>
+                    {% if commande.paye %}
+                        Oui
+                    {% else %}
+                        Non
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p class="text-warning">Aucune</p>
+{% endif %}

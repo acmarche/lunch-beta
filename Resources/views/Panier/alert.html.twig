@@ -1,0 +1,28 @@
+{% if indisponibles | length > 0 %}
+    <div class="alert alert-danger">
+        <h4>Ce(s) produit(s) ont été retiré(s) de la vente, il(s) ont été retiré(s) de votre panier</h4>
+        <ul class="list-group">
+            {% for indisponible in indisponibles %}
+                <li class="list-group-item">
+                    {{ indisponible }}
+                </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+{% endif %}
+
+{% if ruptures | length > 0 %}
+    <div class="alert alert-danger">
+        <h4>Ce(s) produit(s) ne sont plus en stock, il(s) ont été retiré(s) de votre panier</h4>
+        <ul class="list-group">
+            {% for rupture in ruptures %}
+                <li class="list-group-item">
+                    {{ rupture }}
+                </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+{% endif %}
+

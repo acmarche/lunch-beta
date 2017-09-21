@@ -1,0 +1,62 @@
+<h4>Détails paiement</h4>
+
+{% if commande.stripeCharge %}
+    <p>
+        <a href="https://dashboard.stripe.com/" target="_blank">Voir sur Stripe.com</a>
+    </p>
+
+    {% set stripeCharge = commande.stripeCharge %}
+    <br/>
+    <table class="table table-bordered">
+        <tr>
+            <th>Charge Id</th>
+            <td>{{ stripeCharge.idCharge }}</td>
+        </tr>
+        <tr>
+            <th>Montant (en cents)</th>
+            <td>{{ stripeCharge.amount }} €</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>{{ stripeCharge.status }}</td>
+        </tr>
+        <tr>
+            <th>Paid</th>
+            <td>{{ stripeCharge.paid }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ stripeCharge.description }}</td>
+        </tr>
+        <tr>
+            <th>Currency</th>
+            <td>{{ stripeCharge.currency }}</td>
+        </tr>
+        <tr>
+            <th>Crée le</th>
+            <td>{{ stripeCharge.createdStripe }}</td>
+        </tr>
+        <tr>
+            <th>Failure code</th>
+            <td>{{ stripeCharge.failureCode }}</td>
+        </tr>
+        <tr>
+            <th>Failure message</th>
+            <td>{{ stripeCharge.failureMessage }}</td>
+        </tr>
+        <tr>
+            <th>balance_transaction</th>
+            <td>{{ stripeCharge.balanceTransaction }}</td>
+        </tr>
+        <tr>
+            <th>amount_refunded</th>
+            <td>{{ stripeCharge.amountRefunded }}</td>
+        </tr>
+        <tr>
+            <th>object</th>
+            <td>{{ stripeCharge.object }}</td>
+        </tr>
+    </table>
+{% else %}
+    <h4 class="text-warning">Aucun paiement</h4>
+{% endif %}

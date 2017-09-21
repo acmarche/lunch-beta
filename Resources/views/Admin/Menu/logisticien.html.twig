@@ -1,0 +1,17 @@
+{% set action = app.request.attributes.get("_route") %}
+
+<li>
+    <a href="{{ path('aclunch_admin_commerce_index') }}"> Commerces
+    </a>
+</li>
+
+<li>
+    <a href="{{ path('aclunch_logisticien_commande_index') }}">
+        <span class="glyphicon glyphicon-shopping-cart"></span> Commandes à traiter
+    </a>
+</li>
+
+<li>
+    <a href="{{ path('aclunch_admin_commande_archive') }}"> Commandes (archives)
+    </a>
+</li>

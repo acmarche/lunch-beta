@@ -1,0 +1,20 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Commandes lunch à livrer</h3>
+    </div>
+    <div class="panel-body">
+
+        {% include '@AcMarcheLunch/Admin/Commande/index_line.html.twig' with {'commandes':commandesLunch} %}
+
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Commandes à valider</h3>
+    </div>
+    <div class="panel-body">
+
+        {% include '@AcMarcheLunch/Admin/Commande/index_line.html.twig' with {'commandes':commandes} %}
+
+    </div>
+</div>

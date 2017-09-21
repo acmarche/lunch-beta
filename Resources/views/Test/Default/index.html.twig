@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="page-header">
+        <h3>Liste des produits</h3>
+    </div>
+
+    <a href="{{ path('aclunch_panier_index2') }}">Panier</a>
+
+    {% include '@AcMarcheLunch/Test/Default/produit_line.html.twig' with {'produits':produits} %}
+
+    <div class="page-header">
+        <h3>Liste des lunchs</h3>
+    </div>
+
+    {% include '@AcMarcheLunch/Test/Default/produit_line.html.twig' with {'produits':produitsLunch} %}
+
+    <div class="page-header">
+        <h3>Panier produit</h3>
+    </div>
+
+     {% include '@AcMarcheLunch/Test/Default/commande_line.html.twig' with {'commandes':commandes} %}
+
+    <div class="page-header">
+        <h3>Panier lunch</h3>
+    </div>
+     {% include '@AcMarcheLunch/Test/Default/commande_line.html.twig' with {'commandes':commandesLunch} %}
+
+
+
+{% endblock %}

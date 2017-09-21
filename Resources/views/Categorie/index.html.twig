@@ -1,0 +1,49 @@
+{% extends '@AcMarcheLunch/layout.html.twig' %}
+
+{% block heading %}
+    Liste des catégories
+{% endblock %}
+
+{% block body %}
+    <div class="shopping">
+        <div class="container">
+            <!-- Shopping items content -->
+            <div class="shopping-content">
+                <div class="row">
+
+                    {% for categorie in categories %}
+
+                        <div class="col-md-3 col-sm-6">
+                            <!-- Shopping items -->
+                            <div class="shopping-item">
+                                <!-- Image -->
+                                {% if categorie.imageName %}
+                                    <a href="{{ path('aclunch_categorie_show', { 'id': categorie.id }) }}">
+                                        <img class="img-responsive"
+                                             src="{{ vich_uploader_asset(categorie, 'imageFile') | imagine_filter('aclunch_categorie_thumb') }}"
+                                             alt="{{ categorie }}"/>
+                                    </a>
+                                {% endif %}
+                                <!-- Shopping item name / Heading -->
+                                <h4 class="pull-left">
+                                    <a href="{{ path('aclunch_admin_categorie_show', { 'id': categorie.id }) }}">
+                                        {{ categorie.nom }}</a></h4>
+
+                                <div class="clearfix"></div>
+                                <!-- Paragraph -->
+                                <p>
+                                    {% if categorie.description %}
+                                        {{ categorie.description }}.
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div><!-- end row -->
+
+            </div><!-- end shopping content -->
+        </div><!-- end container -->
+    </div><!-- end shopping -->
+
+
+{% endblock %}

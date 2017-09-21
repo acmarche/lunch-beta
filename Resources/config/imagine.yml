@@ -1,0 +1,49 @@
+driver: imagick
+
+filter_sets:
+    cache: ~
+    aclunch_admin_thumb:
+        quality: 100
+        cache: default
+        filters:
+            thumbnail: { size: [250, 188], mode: outbound }
+    aclunch_admin_zoom:
+        quality: 100
+        cache: default
+        filters:
+            thumbnail: { size: [1024, 768], mode: inset }
+    aclunch_produit_thumb:
+        quality: 100
+        cache: default
+        filters:
+            thumbnail: { size: [250, 188], mode: outbound }
+    aclunch_produit_list:
+        quality: 100
+        cache: default
+        filters:
+            thumbnail: { size: [150, 150], mode: outbound }
+    aclunch_produit_zoom:
+        quality: 100
+        cache: default
+        filters:
+            thumbnail: { size: [360, 270], mode: inset }
+    aclunch_commerce_thumb:
+        quality: 100
+        cache: default
+        filters:
+            thumbnail: { size: [250, 188], mode: outbound }
+    aclunch_commerce_zoom:
+        quality: 100
+        cache: default
+        filters:
+            thumbnail: { size: [360, 270], mode: inset }
+    aclunch_categorie_thumb:
+        quality: 100
+        cache: default
+        filters:
+            thumbnail: { size: [170, 105], mode: outbound }
+    aclunch_categorie_zoom:
+        quality: 100
+        cache: default
+        filters:
+            thumbnail: { size: [360, 270], mode: inset }

@@ -1,0 +1,89 @@
+{% extends '@AcMarcheLunch/layout.html.twig' %}
+
+{% block heading %}
+    Payer ma commande
+{% endblock %}
+{% block breadcrumb %}
+    <li><a href="{{ path('aclunch_livraison') }}">Livraison</a></li>
+    <li class="active">Payer</li>
+{% endblock %}
+{% block body %}
+    <div class="general">
+        <div class="container">
+            <h3>Payer mon panier</h3>
+            <div id="ajax-error" class="alert alert-danger" style="display: none;">
+
+            </div>
+            <!-- General information content -->
+            <div class="general-content">
+                {% for commande in commandes %}
+
+                    <h4>Commande chez
+                        <strong>
+                            <a href="{{ path('aclunch_commerce_show', {'id': commande.commerce.id}) }}">{{ commande.commerce }}</a>
+                        </strong>
+                    </h4>
+
+                    <h5 class="text-warning">Livraison le {{ commande.dateLivraison | date('d-m-Y') }}
+                        à {{ commande.lieuLivraison }}
+                    </h5>
+                    <input type="hidden" name="tokenPanier" id="tokenPanier" value="{{ csrf_token(commande) }}">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th style="width: 30%;">Nom</th>
+                            <th style="width: 30%;">Prix</th>
+                            <th style="width: 20%;">Quantite</th>
+                            <th style="width: 20%;">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for commandeProduit in commande.commandeProduits %}
+                            {% set produit = commandeProduit.produit %}
+                            {% set produitPrixTvac = produit | prixTvac %}
+                            <tr>
+                                <td>
+                                    {{ produit }}
+                                </td>
+                                <td>
+                                    {{ produit | prixTvac | number_format }} €
+                                </td>
+                                <td>
+                                    {{ commandeProduit.quantite }}
+                                </td>
+                                <td>
+                                    {{ (produitPrixTvac * commandeProduit.quantite) | number_format }} €
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        <tr class="text-warning">
+                            <td colspan="3"><strong>Frais de transaction (Stripe)</strong></td>
+                            <td>
+                                <strong>
+                                    <div id="ajax-results-frais-transaction">
+                                        {{ commande.couts.fraisTransaction | number_format }} €
+                                    </div>
+                                </strong>
+                            </td>
+                        </tr>
+                        <tr class="text-warning">
+                            <td colspan="3"><strong>Soit un total à payer de</strong></td>
+                            <td>
+                                <strong>
+                                        {{ commande.couts.total | number_format }} €
+                                </strong>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    {% include '@AcMarcheLunch/Panier/paiementForm.html.twig' %}
+                {% else %}
+                    <p class="text-warning">Votre panier est vide</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    {% include '@AcMarcheLunch/Livraison/stripejs.html.twig' %}
+{% endblock %}

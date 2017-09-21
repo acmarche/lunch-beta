@@ -1,0 +1,35 @@
+<div class="btn-toolbar" role="toolbar" style="margin: 0;">
+    <div class="btn-group">
+        <a href="{{ path('aclunch_admin_commerce_index') }}" class="btn btn-primary" role="button"><i
+                    class="glyphicon glyphicon-list"></i>
+            Retour à la liste</a>
+    </div>
+    <div class="btn-group">
+        <a href="{{ path('aclunch_admin_commerce_edit', { 'id': entity.id }) }}" class="btn btn-primary"
+           role="button"><i
+                    class="glyphicon glyphicon-edit"></i> Editer</a>
+    </div>
+
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+            Ajouter un produit <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="{{ path('aclunch_admin_produit_new', { 'commerce': entity.id }) }}">classique</a></li>
+            <li><a href="{{ path('aclunch_admin_produit_new', { 'commerce': entity.id, 'food': true }) }}">de lunch</a></li>
+        </ul>
+    </div>
+
+    <div class="btn-group">
+        <a href="{{ path('aclunch_admin_supplement_new', { 'commerce': entity.id }) }}" class="btn btn-primary"
+           role="button"><i
+                    class="glyphicon glyphicon-plus"></i> Ajouter un supplément</a>
+    </div>
+    <div class="btn-group">
+        <a href="{{ path('aclunch_admin_ingredient_new', { 'commerce': entity.id }) }}" class="btn btn-primary"
+           role="button"><i
+                    class="glyphicon glyphicon-plus"></i> Ajouter un ingrédient</a>
+    </div>
+</div>
+<br/>

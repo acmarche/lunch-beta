@@ -1,0 +1,15 @@
+{% extends '@AcMarcheLunch/Admin/layout.html.twig' %}
+
+{% block body %}
+
+     <div class="page-header">
+        <h3>{{ categorie }}</h3>
+    </div>
+
+    {% include '@AcMarcheLunch/Admin/Categorie/actions.html.twig' with {'entity': categorie } %}
+
+    {% include '@AcMarcheLunch/Admin/Produit/listes.html.twig' with {'produits': categorie.produits} %}
+
+    {% include '@AcMarcheLunch/Admin/Categorie/delete.html.twig' with {'entity': categorie } %}
+
+{% endblock %}

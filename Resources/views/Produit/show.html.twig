@@ -1,0 +1,110 @@
+{% extends '@AcMarcheLunch/layout.html.twig' %}
+
+{% block title %}{{ produit.nom }}{% endblock %}
+
+{% block heading %}
+    {{ produit }}
+{% endblock %}
+
+{% block body %}
+    <!-- Single Item Start -->
+    <div class="single-item">
+        <div class="container">
+            <!-- Shopping single item contents -->
+            <div class="single-item-content">
+                <div class="row">
+                    <div class="col-md-4 col-sm-5">
+                        <!-- Product image -->
+                        {% if produit.imageName %}
+                            <img class="img-responsive img-thumbnail"
+                                 src="{{ vich_uploader_asset(produit, 'imageFile') | imagine_filter('aclunch_produit_zoom') }}"
+                                 alt="{{ produit.nom }}"/>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-8 col-sm-7">
+                        <!-- Heading -->
+                        <h3> {{ produit }} - <a
+                                    href="{{ path('aclunch_commerce_show', { 'id': produit.commerce.id }) }}">
+                                {{ produit.commerce }}
+                            </a>
+                        </h3>
+
+                        <div class="row">
+                            <div class="col-md-7 col-sm-12">
+                                <!-- Single item details -->
+                                <div class="item-details">
+                                    <!-- Paragraph -->
+                                    <p class="text-justify">
+                                        {{ produit.description }}</p>
+                                    <!-- Heading -->
+                                    {% include '@AcMarcheLunch/Produit/ingredients.html.twig' with {'produit' : produit} %}
+
+                                    {% include '@AcMarcheLunch/Produit/present_panier.html.twig' with {'commandeProduit' : commandeProduit} %}
+
+                                    <div id="ajax-results" class="alert alert-success" style="display: none;">
+
+                                    </div>
+                                    <div id="ajax-error" class="alert alert-danger" style="display: none;">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 col-sm-12">
+                                <!-- Form inside table wrapper -->
+                                <div class="table-responsive">
+                                    <!-- Ordering form -->
+                                    {% include '@AcMarcheLunch/Produit/form_order.html.twig' with {'produit':produit, 'token': token} %}
+                                    <!--/ Table End-->
+                                </div><!--/ Table responsive class end -->
+                            </div>
+                        </div><!--/ Inner row end  -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    <!-- Single Item End -->
+{% endblock %}
+
+{% block scripts %}
+
+    <script src="{{ asset('bundles/acmarchelunch/js/panier.js') }}"></script>
+    <script>
+        $(document).on('click', '#addpanier', function () {
+            // that = $(this);
+            quantiteProduit = $("#produit_quantite").val();
+            commerce = $("#commerce").val();
+            token = $("#token").val();
+            $.ajax({
+                url: '{{ path('aclunch_panier_add', {'id': produit.id }) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "commerce": commerce,
+                    "quantiteProduit": quantiteProduit,
+                    "token": token
+                },
+                success: function (data) {
+                    console.log("pp" + data.error);
+                    if (data.error) {
+                        $('div#ajax-error').show();
+                        $('div#ajax-error').html(data.error);
+                    }
+                    else {
+                        $('div#ajax-results').show();
+                        $('div#ajax-results').html('<span class="fa fa-check pull-right"></span>' + data.data);
+                        var urlResume = '{{ path('aclunch_panier_resume') }}';
+                        var urlList = '{{ path('aclunch_panier_list') }}';
+                        updateResume(urlResume, urlList);
+                    }
+                },
+                error: function (data) {
+                    console.log("ii" + data);
+                    $('div#ajax-error').show();
+                    $('div#ajax-error').html(data.error);
+                }
+            });
+            return false;
+        });
+
+    </script>
+{% endblock %}

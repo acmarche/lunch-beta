@@ -1,0 +1,15 @@
+{% extends '@AcMarcheLunch/Admin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="page-header">
+        <h3>Liste des commandes</h3>
+    </div>
+
+    <h4>Commandes lunch</h4>
+    {% include '@AcMarcheLunch/Admin/Commande/index_line.html.twig' with {'commandes':commandesLunch} %}
+
+    <h4>Commandes</h4>
+    {% include '@AcMarcheLunch/Admin/Commande/index_line.html.twig' with {'commandes':commandes} %}
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% set action = app.request.attributes.get("_route") %}
+
+<li>
+    <a href="{{ path('aclunch_admin_commerce_index') }}"> Les Commerces
+    </a>
+</li>
+
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Les commandes... <b
+                class="caret"></b></a>
+    <ul class="dropdown-menu">
+        <li>
+            <a href="{{ path('aclunch_admin_commande_valider_index') }}"> A valider </a>
+        </li>
+
+        <li>
+            <a href="{{ path('aclunch_admin_commande_index') }}"> A livrer </a>
+        </li>
+        <li>
+            <a href="{{ path('aclunch_admin_commande_archive') }}"> Archives </a>
+        </li>
+    </ul>
+</li>
+
+<li>
+    <a href="{{ path('aclunch_admin_produit_index') }}">
+        <span class="glyphicon glyphicon-search"></span> Les produits
+    </a>
+</li>
+
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Paramètres... <b
+                class="caret"></b></a>
+    <ul class="dropdown-menu">
+        <li>
+            <a href="{{ path('aclunch_admin_params_index') }}"> Paramètres généraux </a>
+        </li>
+        <li>
+            <a href="{{ path('aclunch_admin_categorie_index') }}"> Les catégories </a>
+        </li>
+        <li>
+            <a href="{{ path('aclunch_admin_lieulivraison_index') }}"> Les lieux de livraisons </a>
+        </li>
+        <li>
+            <a href="{{ path('aclunch_admin_produit_index') }}"> Tous les produits </a>
+        </li>
+        <li>
+            <a href="{{ path('aclunch_admin_ingredient_index') }}"> Tous les ingrédients </a>
+        </li>
+        <li>
+            <a href="{{ path('aclunch_admin_supplement_index') }}"> Tous les suppléments </a>
+        </li>
+        {% if is_granted('ROLE_ACMARCHE_ADMIN') %}
+            <li><a href="{{ path('acsecurity_user_index') }}">Gestion des utilisateurs</a></li>
+        {% endif %}
+    </ul>
+</li>
+

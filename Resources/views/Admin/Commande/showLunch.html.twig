@@ -1,0 +1,19 @@
+{% extends '@AcMarcheLunch/Admin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="page-header">
+        <h3>{{ commande }}</h3>
+    </div>
+
+    {% include '@AcMarcheLunch/Admin/Commande/actions.html.twig' with {'commande': commande } %}
+
+    {% include '@AcMarcheLunch/Admin/Commande/detail.html.twig' with {'commande': commande } %}
+
+    {% include '@AcMarcheLunch/Admin/Commande/produits.html.twig' with {'commandeProduits': commande.commandeProduits, 'couts': couts} %}
+
+    {% include '@AcMarcheLunch/Admin/Commande/paiement_details.html.twig' with {'commande': commande, 'couts': couts} %}
+
+    {% include '@AcMarcheLunch/Admin/Commande/delete.html.twig' with {'entity': commande } %}
+
+{% endblock %}

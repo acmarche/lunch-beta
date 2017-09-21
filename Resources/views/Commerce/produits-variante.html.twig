@@ -1,0 +1,46 @@
+<!-- Nutrition Start -->
+<h3>Produits</h3>
+<div class="nutrition">
+    <div class="container">
+        <div class="row">
+
+            {% for produit in commerce.produits %}
+
+                <div class="col-md-4 col-sm-4">
+                    <!-- Nutrition Item -->
+                    <div class="nutrition-item">
+                        <!-- Heading -->
+                        <a href="{{ path('aclunch_produit_show', { 'id': produit.id }) }}" title="Ajouter au panier">
+                            <h4>{{ produit }}</h4>
+                        </a>
+                        <!-- Image -->
+                        <a href="{{ path('aclunch_produit_show', { 'id': produit.id }) }}">
+                            <img class="img-responsive img-thumbnail"
+                                 src="{{ vich_uploader_asset(produit, 'imageFile') | imagine_filter('aclunch_produit_zoom') }}"
+                                 alt="{{ produit.nom }}" title="Ajouter au panier" />
+                        </a>
+                        <!-- Paragraph -->
+                        <p>{{ produit.description }}</p>
+                        <!-- Nutrition information table -->
+                        {% if produit.ingredients | length > 0 %}
+                            <h5>Ingrédients</h5>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                    {% for ingredient in produit.ingredients %}
+                                        <tr>
+                                            <td>{{ ingredient }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% endif %}
+                    </div><!--/ Nutrition info end  -->
+                </div><!--/ Column end  -->
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Nutrition End -->

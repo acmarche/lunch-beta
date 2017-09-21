@@ -1,0 +1,55 @@
+<h4 class="text-success">Liste des produits commandés</h4>
+
+{% if commandeProduits | length > 0 %}
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Quantité</th>
+            <th>Prix</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for commandeProduit in commandeProduits %}
+            {% set produit = commandeProduit.produit %}
+            {% set supplements = commandeProduit.commandeProduitSupplements %}
+            <tr>
+                <td><a href="{{ path('aclunch_admin_produit_show', { 'id': produit.id }) }}"> {{ produit }}</a></td>
+                <td>{{ commandeProduit.quantite }}</td>
+                <td>{{ produit | prixTvac | number_format }} €</td>
+            </tr>
+            {% if supplements | length > 0 %}
+                <tr class="text-muted">
+                    <td>Supplément</td>
+                    {% for cpSupplement in supplements %}
+                        <td>{{ cpSupplement }}</td>
+                        <td>{{ cpSupplement.supplement.prix }} €</td>
+                    {% endfor %}
+                </tr>
+            {% endif %}
+        {% endfor %}
+        <tr>
+            <td><strong>Total Htva</strong></td>
+            <td></td>
+            <td>{{ couts.totalHtva|number_format }} €</td>
+        </tr>
+        <tr>
+            <td><strong>Total suppléments Htva</strong></td>
+            <td></td>
+            <td>{{ couts.totalSupplementsHtva|number_format }} €</td>
+        </tr>
+        <tr>
+            <td><strong>Montant Tva</strong></td>
+            <td></td>
+            <td>{{ couts.montantTva|number_format }} €</td>
+        </tr>
+        <tr>
+            <td><strong>Total</strong></td>
+            <td></td>
+            <td>{{ couts.total|number_format }} €</td>
+        </tr>
+        </tbody>
+    </table>
+{% else %}
+    <p>Aucun</p>
+{% endif %}

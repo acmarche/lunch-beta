@@ -1,0 +1,7 @@
+<h4>Détails paiement</h4>
+{% if commandePaiement %}
+
+   <strong>Payé avec :</strong> {{ commandePaiement.stripeTokenType }}
+   <strong>Email utilisé :</strong> {{ commandePaiement.stripeEmail }}
+
+{% endif %}

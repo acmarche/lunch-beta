@@ -1,0 +1,26 @@
+{% extends '@AcMarcheLunch/Admin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="page-header">
+        <h3>Archive des commandes</h3>
+    </div>
+
+
+    <div class="alert alert-info">
+        Se trouvent ici les commandes payées et livrées.
+    </div>
+
+    {% include '@AcMarcheLunch/Admin/Search/commande.html.twig' with {'search_form': search_form } %}
+
+    {% if search %}
+
+        <h4>Commandes lunch</h4>
+        {% include '@AcMarcheLunch/Admin/Commande/index_line.html.twig' with {'commandes':commandesLunch} %}
+
+        <h4>Commandes</h4>
+        {% include '@AcMarcheLunch/Admin/Commande/index_line.html.twig' with {'commandes':commandes} %}
+
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends '@AcMarcheLunch/layout.html.twig' %}
+
+{% block heading %}
+    Livraison de ma commande
+{% endblock %}
+{% block breadcrumb %}
+    <li><a href="{{ path('aclunch_panier') }}">Panier</a></li>
+    <li class="active">Livraison</li>
+{% endblock %}
+{% block body %}
+    <div class="general">
+        <div class="container">
+            <h3>Livraison de mon panier</h3>
+
+            <!-- General information content -->
+            <div class="general-content">
+                <div class="row">
+                    <div class="col-lg-6">
+                        {{ form_start(livraison_form) }}
+                        {{ form_widget(livraison_form) }}
+                        <input type="submit" value="Valider mon choix" class="btn btn-default"/>
+                        {{ form_end(livraison_form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
